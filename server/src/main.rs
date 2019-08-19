@@ -4,9 +4,18 @@
 use rocket::response::content;
 use rocket_contrib::json::Json;
 
+
+mod user;
+use user::{User};
+
 #[get("/")]
 fn index() -> content::Json<&'static str> {
     content::Json("{ 'hi': 'world' }")
+}
+
+#[post("/", data = "<user>")]
+fn create(user: Json<User>) -> Json<User> {
+    user
 }
 
 fn main() {
