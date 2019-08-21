@@ -1,10 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Nav, Navbar, Container } from 'react-bootstrap';
 
 const NavBar = () => (
-  <div>
-    <div><Link to="/">Home</Link> <Link to="/hello">Hello</Link> <Link to="/counter">Counter</Link></div>
-  </div>
+  <Navbar bg="dark" variant="dark" expand="lg">
+    <Container>
+    <Navbar.Brand href="/">Home Cloud</Navbar.Brand>
+    <Nav>
+      <Nav.Item>
+        <Nav.Link href="/">Home</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/hello" eventKey="link-1">Hello</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/surveillance" eventKey="link-1">Surveillance</Nav.Link>
+      </Nav.Item>
+    </Nav>
+    </Container>
+  </Navbar>
 )
 
 export default NavBar
