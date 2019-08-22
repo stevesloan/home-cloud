@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 const routes = (
   <div>
     <NavBar />
-    <Container>
+    <Container className="mt-4">
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/hello" component={Hello} />
