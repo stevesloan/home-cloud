@@ -1,20 +1,35 @@
 [package]
-name = "homeCloud"
+name = "actix-web-rest-api-with-jwt"
 version = "0.1.0"
-authors = ["Steve Sloan <steve@stevesloan.ca>"]
+authors = ["SakaDream <bahaimt@gmail.com>"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-rocket = "0.4.2"
-rocket_codegen = "0.4.2"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-serde_derive = "1.0"
-diesel = "1.4.0"
+actix-web = "1.0.0"
+actix-rt = "0.2.2"
+actix-service = "0.4.1"
+log = "0.4.6"
+env_logger = "0.6.1"
+diesel_migrations = "1.4.0"
+serde = "1.0.92"
+serde_derive = "1.0.92"
+serde_json = "1.0.39"
+dotenv = "0.14.1"
+futures = "0.1.27"
+failure = "0.1.5"
+derive_more = "0.15.0"
+jsonwebtoken = "6.0.1"
+bcrypt = "0.4.0"
+time = "0.1.42"
 
-[dependencies.rocket_contrib]
-version = "0.4.2"
-default-features = false
-features = ["json"]
+[dependencies.diesel]
+version = "1.4.2"
+features = ["postgres", "r2d2", "chrono"]
+
+[dependencies.chrono]
+version = "0.4.6"
+features = ["serde"]
+
+[dependencies.uuid]
+version = "0.7.4"
+features = ["v4"]
