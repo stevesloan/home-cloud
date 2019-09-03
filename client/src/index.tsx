@@ -6,7 +6,7 @@ import App from './App';
 import configureStore, { history } from './configureStore'
 import * as serviceWorker from './serviceWorker';
 
-postData('http://localhost:8080/api/auth/login', {"username_or_email":"test", "password":"test"})
+postData('http://localhost/api/auth/login', {"username_or_email":"test", "password":"test"})
   .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
   .catch(error => console.error(error));
 

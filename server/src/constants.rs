@@ -18,7 +18,6 @@ pub const MESSAGE_TOKEN_MISSING: &str = "Token is missing";
 
 // Headers
 pub const AUTHORIZATION: &str = "Authorization";
-pub const CORS: &str = "Access-Control-Allow-Origin";
 
 // Misc
 pub const EMPTY: &str = "";
