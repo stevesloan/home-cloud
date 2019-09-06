@@ -9,6 +9,7 @@ export const LOGIN_SUCCESS = 'authentication/login_success';
 export const LOGIN_ERROR = 'authentication/login_error';
 
 export function login(username: string, password: string) {
+  
   return async (dispatch:Dispatch) => {
     dispatch(request());
     fetchData('POST', '/auth/login', { "username_or_email": username, "password": password })
