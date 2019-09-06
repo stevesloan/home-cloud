@@ -8,6 +8,6 @@ const INITIAL_STATE = {
 export default function loginReducer(state = INITIAL_STATE, action = { type: '' }) {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return { token: action.data };
+      // return { token: action.data };
   }
 }
