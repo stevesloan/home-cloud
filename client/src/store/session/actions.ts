@@ -31,14 +31,20 @@ export const login = (username: string, password: string): ThunkAction<Promise<v
     return new Promise<void>((resolve) => {
       dispatch(isFetching(true))
       console.log('Login in progress')
-      setTimeout(() => {
-        dispatch(set('this_is_access_token'))
-        setTimeout(() => {
-          dispatch(isFetching(false))
-          console.log('Login done')
-          resolve()
-        }, 1000)
-      }, 3000)
+      fetchData('POST', '/auth/login', { "username_or_email": username, "password": password })
+        .then(data => {
+          dispatch(set('success'))
+          console.log('done')
+        })
+        .catch(error => {});
+      // setTimeout(() => {
+      //   dispatch(set('this_is_access_token'))
+      //   setTimeout(() => {
+      //     dispatch(isFetching(false))
+      //     console.log('Login done')
+      //     resolve()
+      //   }, 1000)
+      // }, 3000)
       //   return fetchData('POST', '/auth/login', { "username_or_email": username, "password": password })
       // .then(data => data)
       // .catch(error => error);

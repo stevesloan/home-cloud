@@ -1,13 +1,17 @@
-import { Action } from 'redux';
 import { LOGIN_SUCCESS } from './action';
 
-const INITIAL_STATE = {
-  count: 0,
+interface Auth {
+  token: string;
+}
+
+const INITIAL_STATE:Auth = {
+  token: '',
+
 };
 
-export default function loginReducer(state = INITIAL_STATE, action = { type: '' }) {
+export default function loginReducer(state = INITIAL_STATE, action = { type: '', payload: {} }) {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      // return { token: action.data };
+      return { token: action.payload };
   }
 }
