@@ -1,13 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { login as loginRequest } from "./data";
-import { login as loginAction } from "../../../store/session/actions";
-import { Dispatch } from 'redux';
+import { login as loginAction } from "../../../store/auth/actions";
 import { ThunkDispatch } from 'redux-thunk'
+import { AccessToken } from '../../../store/auth/reducers'
+import { State as RootState } from '../../../store'
+
+const Login = (props: Props) => {
+  return (
+    <div>{(props.auth.isFetching) ? (<div>Loading</div>) : null}
+      <label htmlFor="name">Name</label>
+      <input name="name"></input>
+      <br />
+      <label htmlFor="password">Password</label>
+      <input name="password" type="password"></input>
+      <br />
+      <button onClick={async () => { await props.handleLogin('test', 'test') }}>Submit</button> >
+      </div >
+  )
+}
 
 interface DispatchProps {
   handleLogin: (username: string, password: string) => void
+}
+
+interface StateProps {
+  auth: AccessToken
+}
+
+const mapStateToProps = (state: RootState): StateProps => {
+  return {
+    auth: state.auth
+  }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
@@ -19,29 +42,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
   }
 };
 
-type Props = DispatchProps
+type Props = StateProps & DispatchProps
 
-const Login = (prop:Props) => {
-  const test = async () => {
-    await prop.handleLogin('test', 'test');
-  }
-  return (
-    <div>
-      <label htmlFor="name">Name</label>
-      <input name="name"></input>
-      <br />
-      <label htmlFor="password">Password</label>
-      <input name="password" type="password"></input>
-      <br />
-      <button onClick={test}>Submit</button>>
-      </div>
-  )
-}
-
-export default connect<DispatchProps>(
-  null, mapDispatchToProps
-
-  // (dispatch) => ({
-  //   LoginAction: bindActionCreators(loginAction, dispatch),
-  // })
+export default connect(
+  mapStateToProps, mapDispatchToProps
 )(Login);
