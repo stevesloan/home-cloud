@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { State } from '../reducers'
+import { State } from '../store'
 
 interface HelloChildProps {
   pathname: string

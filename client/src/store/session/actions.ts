@@ -32,8 +32,8 @@ export const login = (username: string, password: string): ThunkAction<Promise<v
       dispatch(isFetching(true))
       console.log('Login in progress')
       fetchData('POST', '/auth/login', { "username_or_email": username, "password": password })
-        .then(data => {
-          dispatch(set('success'))
+        .then(result => {
+          dispatch(set(result.data.token))
           console.log('done')
         })
         .catch(error => {});

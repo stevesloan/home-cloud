@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux'
 import { Action } from './actions'
 
-// States' definition
 export interface AccessToken {
   isFetching: boolean
-  accessToken?: string
+  value?: string
 }
 
 export interface State {
@@ -14,8 +13,7 @@ export interface State {
 const accessToken = (state: AccessToken = { isFetching: false }, action: Action): AccessToken => {
   switch (action.type) {
     case 'SET':
-      console.log('test steve')
-      return { ...state, accessToken: action.accessToken }
+      return { ...state, value: action.accessToken, isFetching: false }
     case 'SET_FETCHING':
       return { ...state, isFetching: action.isFetching }
     default:
