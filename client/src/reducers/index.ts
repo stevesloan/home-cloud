@@ -1,15 +1,18 @@
 import { combineReducers } from 'redux'
 import { History } from 'history'
 import { RouterState, connectRouter } from 'connected-react-router'
-// import counterReducer from './counter'
+import loginReducer from './auth'
+import accessToken from '../store/session/reducers'
 
 const rootReducer = (history: History) => combineReducers({
-//   count: counterReducer,
+  accessToken: accessToken,
+  auth: loginReducer,
   router: connectRouter(history)
 })
 
 export interface State {
-//   count: number
+  accessToken: {}
+  auth: {}
   router: RouterState
 }
 

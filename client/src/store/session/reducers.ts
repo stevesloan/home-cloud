@@ -13,10 +13,13 @@ export interface State {
 
 const accessToken = (state: AccessToken = { isFetching: false }, action: Action): AccessToken => {
   switch (action.type) {
-  case 'SET':
-    return { ...state, accessToken: action.accessToken }
-  case 'SET_FETCHING':
-    return { ...state, isFetching: action.isFetching }
+    case 'SET':
+      console.log('test steve')
+      return { ...state, accessToken: action.accessToken }
+    case 'SET_FETCHING':
+      return { ...state, isFetching: action.isFetching }
+    default:
+      return { ...state }
   }
 }
 
