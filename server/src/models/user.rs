@@ -59,24 +59,26 @@ impl User {
     }
 
     pub fn login(login: LoginDTO, conn: &Connection) -> Option<LoginInfoDTO> {
-        let user_to_verify = users
+        let result = users
             .filter(username.eq(&login.username_or_email))
             .or_filter(email.eq(&login.username_or_email))
-            .get_result::<User>(conn)
-            .unwrap();
-        if !user_to_verify.password.is_empty()
-            && verify(&login.password, &user_to_verify.password).unwrap()
-        {
-            if let Some(login_history) = LoginHistory::create(&user_to_verify.username, conn) {
-                if LoginHistory::save_login_history(login_history, conn).is_err() {
-                    return None;
-                }
-                let login_session_str = User::generate_login_session();
-                if User::update_login_session_to_db(&user_to_verify.username, &login_session_str, conn) {
-                    return Some(LoginInfoDTO {
-                        username: user_to_verify.username,
-                        login_session: login_session_str,
-                    });
+            .first::<User>(conn);
+        if result.is_ok() {
+            let user_to_verify = result.unwrap();
+            if !user_to_verify.password.is_empty()
+                && verify(&login.password, &user_to_verify.password).unwrap()
+            {
+                if let Some(login_history) = LoginHistory::create(&user_to_verify.username, conn) {
+                    if LoginHistory::save_login_history(login_history, conn).is_err() {
+                        return None;
+                    }
+                    let login_session_str = User::generate_login_session();
+                    if User::update_login_session_to_db(&user_to_verify.username, &login_session_str, conn) {
+                        return Some(LoginInfoDTO {
+                            username: user_to_verify.username,
+                            login_session: login_session_str,
+                        });
+                    }
                 }
             }
         }
