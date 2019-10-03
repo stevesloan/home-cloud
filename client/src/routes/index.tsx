@@ -1,5 +1,6 @@
 import React from 'react'
-import { Route, Switch } from 'react-router'
+import { Route, Switch } from 'react-router';
+import PrivateRoute from './PrivateRoute';
 import Home from '../components/Home'
 import Hello from '../components/Hello'
 import Surveillance from '../components/Surveillance'
@@ -15,7 +16,7 @@ const routes = (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/hello" component={Hello} />
-        <Route path="/surveillance" component={Surveillance} />
+        <PrivateRoute path="/surveillance" component={Surveillance} />
         <Route path="/login" component={Login} />
         <Route component={NoMatch} />
       </Switch>
