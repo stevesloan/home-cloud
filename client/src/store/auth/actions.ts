@@ -4,12 +4,13 @@ import { fetchData } from '../../utils';
 
 
 export const SUCCESS = "auth/success";
+export const FAILURE = "auth/failure";
 export const REQUEST = "auth/request";
 
 // Action Definition
-export interface SetSuccess {
-  type: typeof SUCCESS,
-  accessToken: string,
+export interface ProcessResult {
+  type: typeof SUCCESS | typeof FAILURE,
+  accessToken?: string,
 }
 
 export interface SetFetching {
@@ -18,11 +19,11 @@ export interface SetFetching {
 }
 
 // Union Action Types
-export type Action = SetSuccess | SetFetching
+export type Action = ProcessResult | SetFetching
 
 // Action Creators
-export const setSuccess = (accessToken: string): SetSuccess => {
-  return { type: SUCCESS, accessToken }
+export const processResult = (accessToken: string): ProcessResult => {
+  return (accessToken) ? { type: SUCCESS, accessToken } : { type: FAILURE };
 }
 
 export const isFetching = (isFetching: boolean): SetFetching => {
@@ -35,7 +36,7 @@ export const login = (username: string, password: string): ThunkAction<Promise<v
       dispatch(isFetching(true))
       fetchData('POST', '/auth/login', { "username_or_email": username, "password": password })
         .then(result => {
-          dispatch(setSuccess(result.data.token))
+          dispatch(processResult(result.data.token))
         })
         .catch(error => { console.error(error) });
     })

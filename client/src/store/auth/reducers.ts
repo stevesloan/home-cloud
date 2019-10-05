@@ -1,5 +1,5 @@
 
-import { Action, SUCCESS, REQUEST } from './actions'
+import { Action, SUCCESS, REQUEST, FAILURE } from './actions'
 import jwt_decode from 'jwt-decode';
 
 export interface AccessToken {
@@ -13,7 +13,7 @@ const InnitialState: AccessToken = { isFetching: false, accessToken: null, usern
 const accessToken = (state: AccessToken = InnitialState, action: Action): AccessToken => {
   switch (action.type) {
     case SUCCESS:
-      const tokenData: { user: string } = jwt_decode(action.accessToken);
+      const tokenData: { user: string } = jwt_decode(<string>action.accessToken);
       return {
         ...state,
         accessToken: action.accessToken,
@@ -22,6 +22,8 @@ const accessToken = (state: AccessToken = InnitialState, action: Action): Access
       }
     case REQUEST:
       return { ...state, isFetching: action.isFetching }
+    case FAILURE:
+      return { ...state, isFetching: false }
     default:
       return { ...state }
   }

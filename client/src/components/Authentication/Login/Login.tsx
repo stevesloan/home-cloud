@@ -6,6 +6,7 @@ import { AccessToken } from '../../../store/auth/reducers'
 import { State as RootState } from '../../../store'
 import { Form, Button, Container, Row, Col, Spinner } from 'react-bootstrap';
 import { Redirect } from "react-router-dom";
+import { getOr } from 'lodash/fp';
 import './Login.scss'
 
 const Login = (props: Props) => {
@@ -17,7 +18,7 @@ const Login = (props: Props) => {
     props.handleLogin(username, password);
   }
 
-  if (isLoggedIn) return (<Redirect to={props.location.from} />);
+  if (isLoggedIn) return (<Redirect to={getOr(['from', 'location'], '/', props)} />);
 
   return (
     <div>
