@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { login as loginAction } from "../../../store/auth/actions";
 import { ThunkDispatch } from 'redux-thunk'

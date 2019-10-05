@@ -14,8 +14,8 @@ const routes = (
     <NavBar />
     <Container className="mt-4">
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/hello" component={Hello} />
+        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute path="/hello" component={Hello} />
         <PrivateRoute path="/surveillance" component={Surveillance} />
         <Route path="/login" component={Login} />
         <Route component={NoMatch} />
